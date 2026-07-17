@@ -1,0 +1,1 @@
+var JisuUrl = "https://api.ok0066168.com/caiji/speedLot.php";

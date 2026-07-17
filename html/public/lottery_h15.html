@@ -1,0 +1,477 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="utf-8" />
+    <meta name="format-detection" content="telephone=no" />
+    <meta http-equiv="X-UA-Compatible" content="IE=EmulateIE11" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
+    <title>彩票开奖查询</title>
+    <meta name="keywords" content="彩票开奖查询,彩票开奖结果,福利彩票开奖结果,体育彩票开奖结果" />
+    <link rel="stylesheet" href="../../css/headorfood.css?v=20181181558" />
+    <link rel="shortcut icon" href="../../favicon.ico">
+    <link rel="stylesheet" href="../../css/home.css?v=20181181559" />
+    <link rel="stylesheet" href="../../css/idangerous.swiper.css?v=20181181558" />
+    <style>
+        /* ====== H5 移动端布局覆盖（只改布局，不改颜色和球样式） ====== */
+        
+        body {
+            min-width: auto !important;
+            overflow-x: hidden;
+            -webkit-tap-highlight-color: transparent;
+        }
+        
+        /* 主容器宽度自适应 */
+        .bodybox,
+        .bodybox .contentbox,
+        .bodybox .contentbox .contentc,
+        .bodybox .contentbox .contentcb,
+        .bodybox .contentbox .contentcb .cztypel,
+        .bodybox .contentbox .contentcb .cztypel ul {
+            width: 100% !important;
+            min-width: auto !important;
+            max-width: 100% !important;
+            margin: 0 !important;
+            padding: 0 !important;
+            box-sizing: border-box;
+        }
+        
+        /* 卡片样式 */
+        .bodybox .contentbox .contentcb .cztypel ul li.cztypell {
+            width: 100% !important;
+            height: 0% !important;
+            margin: 0 !important;
+            padding: 8px 12px !important;
+            background: #fff;
+            border-radius: 0;
+            box-shadow: none;
+            border-bottom: 1px solid #eee;
+            box-sizing: border-box;
+            float: none !important;
+            list-style: none;
+        }
+        
+        /* 内部容器 */
+        .bodybox .contentbox .contentcb .cztypel ul li .cztypelt {
+            padding: 0 !important;
+            width: 100% !important;
+        }
+        
+        /* 行布局改为块级 */
+        .bodybox .contentbox .contentcb .cztypel ul li .cztypelt .rowbox1 {
+            display: block !important;
+            width: 100% !important;
+        }
+        
+        /* 信息区全宽 */
+        .bodybox .contentbox .contentcb .cztypel ul li .cztypelt .rowbox1 .inforr,
+        .bodybox .contentbox .contentcb .cztypel ul li .cztypelt .rowbox1 .inforr[style*="float"],
+        .bodybox .contentbox .contentcb .cztypel ul li .cztypelt .rowbox1 .inforr[style*="width"] {
+            float: none !important;
+            width: 100% !important;
+            max-width: 100% !important;
+            display: block !important;
+            margin: 0 0 10px 0 !important;
+            padding: 0 !important;
+        }
+        
+        /* 标题文字 */
+        .bodybox .contentbox .contentcb .cztypel ul li .cztypelt .rowbox1 .inforr h1 {
+            font-size: 16px !important;
+            line-height: 1.5 !important;
+            margin: 0 0 6px 0 !important;
+            font-weight: bold;
+            word-break: break-all;
+        }
+        
+        .bodybox .contentbox .contentcb .cztypel ul li .cztypelt .rowbox1 .inforr p {
+            font-size: 12px !important;
+            margin: 2px 0 !important;
+        }
+        
+        /* 开奖中提示 */
+        .bodybox .contentbox .contentcb .cztypel ul li .cztypelt .rowbox1 .inforr .opentyle {
+            font-size: 13px !important;
+            font-weight: bold;
+            margin: 4px 0 !important;
+        }
+        
+        /* 倒计时 */
+        .bodybox .contentbox .contentcb .cztypel ul li .cztypelt .rowbox1 .inforr .linetime {
+            margin: 8px 0 !important;
+            font-size: 13px;
+        }
+        
+        .bodybox .contentbox .contentcb .cztypel ul li .cztypelt .rowbox1 .inforr .linetime .bgtime {
+            display: inline-block;
+            background: #333;
+            color: #fff;
+            padding: 3px 6px;
+            border-radius: 4px;
+            font-size: 13px;
+            min-width: 28px;
+            text-align: center;
+        }
+        
+        .bodybox .contentbox .contentcb .cztypel ul li .cztypelt .rowbox1 .inforr .linetime .hourtxt {
+            margin: 0 3px;
+        }
+        
+        /* 号码容器高度自动 */
+        .bodybox .contentbox .contentcb .cztypel ul li .cztypelt .rowbox3,
+        .bodybox .contentbox .contentcb .cztypel ul li .cztypelt .rowbox2 {
+            height: auto !important;
+            width: 100% !important;
+            margin: 8px 0 !important;
+        }
+        
+        /* 开奖号码 - 只改排列方式，不改颜色和背景 */
+        .kajianhao {
+            display: flex !important;
+            flex-wrap: wrap !important;
+            justify-content: flex-start !important;
+            align-items: center !important;
+            gap: 6px !important;
+            padding: 0 !important;
+            margin: 0 !important;
+            list-style: none !important;
+        }
+        
+        .kajianhao li {
+            margin: 0 !important;
+            padding: 0 !important;
+            list-style: none !important;
+            /* 不覆盖颜色、背景、文字颜色 - 让原始CSS和JS处理 */
+        }
+        
+        /* 生肖 - 只改排列 */
+        .kajiansx {
+            display: flex !important;
+            flex-wrap: wrap !important;
+            justify-content: flex-start !important;
+            align-items: center !important;
+            gap: 6px !important;
+            padding: 0 !important;
+            margin: 4px 0 0 0 !important;
+            list-style: none !important;
+        }
+        
+        .kajiansx li {
+            margin: 0 !important;
+            padding: 0 !important;
+            list-style: none !important;
+            text-align: center;
+            font-size: 12px !important;
+            /* 不覆盖颜色 */
+        }
+        
+        /* 视频按钮 - 只改布局 */
+        .openVideo {
+            display: block !important;
+            width: 100% !important;
+            height: auto !important;
+            line-height: 40px !important;
+            padding: 0 !important;
+            margin: 10px 0 0 0 !important;
+            left: auto !important;
+            position: static !important;
+            text-align: center;
+            border-radius: 8px;
+            font-size: 14px !important;
+            font-weight: bold;
+            cursor: pointer;
+            /* 保留原始背景色 */
+        }
+        
+        .openVideo::before {
+            display: none !important;
+        }
+        
+        .openVideo::after {
+            content: "📺 观看开奖直播";
+        }
+        
+        /* 隐藏不需要的元素 */
+        .nextIssue.displaynone,
+        .lhcnoopen,
+        .dltnoopen {
+            display: none !important;
+        }
+        
+        /* 顶部标题栏 */
+        .mobile-header {
+            background: linear-gradient(135deg, #ff6500 0%, #ff8533 100%);
+            color: white;
+            text-align: center;
+            padding: 12px;
+            font-size: 18px;
+            font-weight: bold;
+            letter-spacing: 2px;
+            position: sticky;
+            top: 0;
+            z-index: 100;
+        }
+        
+        /* 清除浮动 */
+        .cztypelt::after,
+        .rowbox1::after {
+            content: "";
+            display: table;
+            clear: both;
+        }
+    </style>
+</head>
+<body>
+    <div class="mobile-header">🏆 彩票开奖直播</div>
+    
+    <div class="bodybox">
+        <div class="contentbox" style="width: 100%; margin: 0px">
+            <div class="contentc">
+                <div class="contentcb" style="margin-top: 0px;">
+                    <div class="" style="overflow: hidden; height: auto;">
+                        <div class="cztypel" style="position: inherit; width: 100%">
+                            <ul>
+                                <li class="cztypell" id="lhc" style="width: 98%; margin-bottom: 2px;">
+                                    <div class="cztypelt">
+                                        <div class="rowbox1">
+                                            <div class="inforr" style="float: left">
+                                                <input type="hidden" id="lhcNums" value="0" />
+                                                <span class="nextIssue displaynone"></span>
+                                                <h1>香港⑥合彩第<span class="preDrawIssue"></span>期开奖</h1>
+                                                <p>每周3期，21:30开奖</p><br />
+                                                <p class="opentyle">开奖中...</p>
+                                                <div class="line linetime cuttime indextime">
+                                                    <span class="lhcnoopen" style="display: none">暂未开盘，请在</span>
+                                                    <span class="bgtime hour">...</span>
+                                                    <span class="hourtxt">时</span>
+                                                    <span class="bgtime minute">...</span>
+                                                    <span>分</span>
+                                                    <span class="bgtime second">...</span>
+                                                    <span>秒</span>
+                                                    <span class="lhcnoopen" style="display: none">后重试</span>
+                                                </div>
+                                            </div>
+                                            <div class="inforr" style="float: left; width: 350px;">
+                                                <div class="rowbox3" style="height:37px">
+                                                    <ul class="kajianhao">
+                                                        <li class="lhcblue"></li>
+                                                        <li class="lhcblue"></li>
+                                                        <li class="lhcblue"></li>
+                                                        <li class="lhcblue"></li>
+                                                        <li class="lhcblue"></li>
+                                                        <li class="lhcblue"></li>
+                                                        <li style="color: black;">+</li>
+                                                        <li class="lhcblue"></li>
+                                                    </ul>
+                                                </div>
+                                                <div class="rowbox2" style="height:37px">
+                                                    <ul class="kajiansx">
+                                                        <li style="color: black;"></li>
+                                                        <li style="color: black;"></li>
+                                                        <li style="color: black;"></li>
+                                                        <li style="color: black;"></li>
+                                                        <li style="color: black;"></li>
+                                                        <li style="color: black;"></li>
+                                                        <li></li>
+                                                        <li style="color: black;"></li>
+                                                    </ul>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </li>
+                                <li class="cztypell" id="jslhc" style="width: 98%; margin-bottom: 2px;">
+                                    <div class="cztypelt">
+                                        <div class="rowbox1">
+                                            <div class="inforr" style="float: left">
+                                                <input type="hidden" id="JslhcNums" value="0" />
+                                                <span class="nextIssue displaynone"></span>
+                                                <h1>澳门⑥合彩第<span class="preDrawIssue"></span>期开奖</h1>
+                                                <p>每天一期，15：00开盘，21:30开奖</p><br />
+                                                <p class="opentyle">开奖中...</p>
+                                                <div class="line linetime cuttime indextime">
+                                                    <span class="bgtime hour">...</span>
+                                                    <span class="hourtxt">时</span>
+                                                    <span class="bgtime minute">...</span>
+                                                    <span>分</span>
+                                                    <span class="bgtime second">...</span>
+                                                    <span>秒</span>
+                                                </div>
+                                            </div>
+                                            <div class="inforr" style="float: left; width: 350px;">
+                                                <div class="rowbox3" style="height:37px">
+                                                    <ul class="kajianhao">
+                                                        <li class="lhcblue"></li>
+                                                        <li class="lhcblue"></li>
+                                                        <li class="lhcblue"></li>
+                                                        <li class="lhcblue"></li>
+                                                        <li class="lhcblue"></li>
+                                                        <li class="lhcblue"></li>
+                                                        <li style="color: black;">+</li>
+                                                        <li class="lhcblue"></li>
+                                                    </ul>
+                                                </div>
+                                                <div class="rowbox2" style="height:37px">
+                                                    <ul class="kajiansx">
+                                                        <li style="color: black;"></li>
+                                                        <li style="color: black;"></li>
+                                                        <li style="color: black;"></li>
+                                                        <li style="color: black;"></li>
+                                                        <li style="color: black;"></li>
+                                                        <li style="color: black;"></li>
+                                                        <li></li>
+                                                        <li style="color: black;"></li>
+                                                    </ul>
+                                                </div>
+                                            </div>
+                                            <div class="inforr" style="float: left;">
+                                                <span class="openVideo" onclick="Tokj(1)"></span>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </li>
+                                <li class="cztypell" id="self18" style="width: 98%; margin-bottom: 2px;">
+                                    <div class="cztypelt">
+                                        <div class="rowbox1">
+                                            <div class="inforr" style="float: left">
+                                                <input type="hidden" id="lhcNums18" value="0" />
+                                                <span class="nextIssue displaynone"></span>
+                                                <h1>新澳门⑥合彩第<span class="preDrawIssue"></span>期开奖</h1>
+                                                <p>每天一期，15：00开盘，21:30开奖</p><br />
+                                                <span class="nextIssue displaynone"></span>
+                                                <p class="opentyle">开奖中...</p>
+                                                <div class="line linetime cuttime indextime" id="timebox">
+                                                    <span class="dltnoopen" style="display: none">暂未开盘，请在</span>
+                                                    <span class="bgtime hour">...</span>
+                                                    <span class="hourtxt">时</span>
+                                                    <span class="bgtime minute">...</span>
+                                                    <span>分</span>
+                                                    <span class="bgtime second">...</span>
+                                                    <span>秒</span>
+                                                    <span class="dltnoopen" style="display: none">后重试</span>
+                                                </div>
+                                            </div>
+                                            <div class="inforr" style="float: left; width: 350px;">
+                                                <div class="rowbox3" style="height:37px">
+                                                    <ul class="kajianhao">
+                                                        <li class="lhcblue"></li>
+                                                        <li class="lhcblue"></li>
+                                                        <li class="lhcblue"></li>
+                                                        <li class="lhcblue"></li>
+                                                        <li class="lhcblue"></li>
+                                                        <li class="lhcblue"></li>
+                                                        <li style="color: black;">+</li>
+                                                        <li class="lhcblue"></li>
+                                                    </ul>
+                                                </div>
+                                                <div class="rowbox2" style="height:37px">
+                                                    <ul class="kajiansx">
+                                                        <li style="color: black;"></li>
+                                                        <li style="color: black;"></li>
+                                                        <li style="color: black;"></li>
+                                                        <li style="color: black;"></li>
+                                                        <li style="color: black;"></li>
+                                                        <li style="color: black;"></li>
+                                                        <li></li>
+                                                        <li style="color: black;"></li>
+                                                    </ul>
+                                                </div>
+                                            </div>
+                                            <div class="inforr" style="float: left;">
+                                                <span class="openVideo" onclick="Tokj(2)"></span>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </li>
+                                <li class="cztypell" id="self79" style="width: 98%;">
+                                    <div class="cztypelt">
+                                        <div class="rowbox1">
+                                            <div class="inforr" style="float: left">
+                                                <input type="hidden" id="lhcNums20" value="0" />
+                                                <span class="nextIssue displaynone"></span>
+                                                <h1>快乐8⑥合彩第<span class="preDrawIssue"></span>期开奖</h1>
+                                                <p>每天一期，15：00开盘，21:00开奖</p><br />
+                                                <span class="nextIssue displaynone"></span>
+                                                <p class="opentyle">开奖中...</p>
+                                                <div class="line linetime cuttime indextime" id="timebox">
+                                                    <span class="dltnoopen" style="display: none">暂未开盘，请在</span>
+                                                    <span class="bgtime hour">...</span>
+                                                    <span class="hourtxt">时</span>
+                                                    <span class="bgtime minute">...</span>
+                                                    <span>分</span>
+                                                    <span class="bgtime second">...</span>
+                                                    <span>秒</span>
+                                                    <span class="dltnoopen" style="display: none">后重试</span>
+                                                </div>
+                                            </div>
+                                            <div class="inforr" style="float: left; width: 350px;">
+                                                <div class="rowbox3" style="height:37px">
+                                                    <ul class="kajianhao">
+                                                        <li class="lhcblue"></li>
+                                                        <li class="lhcblue"></li>
+                                                        <li class="lhcblue"></li>
+                                                        <li class="lhcblue"></li>
+                                                        <li class="lhcblue"></li>
+                                                        <li class="lhcblue"></li>
+                                                        <li style="color: black;">+</li>
+                                                        <li class="lhcblue"></li>
+                                                    </ul>
+                                                </div>
+                                                <div class="rowbox2" style="height:37px">
+                                                    <ul class="kajiansx">
+                                                        <li style="color: black;"></li>
+                                                        <li style="color: black;"></li>
+                                                        <li style="color: black;"></li>
+                                                        <li style="color: black;"></li>
+                                                        <li style="color: black;"></li>
+                                                        <li style="color: black;"></li>
+                                                        <li></li>
+                                                        <li style="color: black;"></li>
+                                                    </ul>
+                                                </div>
+                                            </div>
+                                            <div class="inforr" style="float: left;">
+                                                <span class="openVideo" onclick="Tokj(4)"></span>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    
+    <script type="text/javascript" src="../../js/lib/jquery-1.7.2.min.js"></script>
+    <script type="text/javascript" src="../../js/lib/config.js?v=20181181559"></script>
+    <script type="text/javascript" src="../../js/loacal/animate/animate.js?v=20181181559"></script>
+    <script type="text/javascript" src="../../js/loacal/index.js?v=202111"></script>
+    <script type="text/javascript" src="../jisu/js/jsUrlConfig.js"></script>
+    
+    <script>
+        $(function() { 
+            ajaxRequstSelf(3, 18, '#self18'); 
+            ajaxRequstSelf(3, 79, '#self79'); 
+            ReLoadPage(); 
+        });
+        
+        function ReLoadPage() { 
+            setTimeout(function() { location.reload(); }, 600000) 
+        }
+        
+        function ajaxRequstSelf(type, gid, id) { 
+            indexObj.ajaxXjpLhc(type, gid, id); 
+        }
+        
+        function Tokj(type) {
+            let url = "";
+            if (type == 1) url = "https://d2.freelegalway.com/pc/#/";
+            else if (type == 2) url = "https://00853lhc.com/";
+            else if (type == 3) url = "https://lucky49.vip/";
+            else if (type == 4) url = "https://www.cwl.gov.cn/ygkj/wqkjsp/kl8/";
+            window.open(url);
+        }
+    </script>
+</body>
+</html>
